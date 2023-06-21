@@ -1,4 +1,4 @@
-package com.example.hbjracademy
+package com.example.hbjracademy.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
