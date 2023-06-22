@@ -1,7 +1,9 @@
 package com.example.hbjracademy.domain.repository
 
-import com.example.hbjracademy.data.remote.dto.gamesDto
+import com.example.hbjracademy.domain.models.GamesResponse
 
-interface gamesRepository {
-    suspend fun getGames() : List<gamesDto>
+interface GamesRepository {
+
+    suspend fun getGames(ordering:String, page:Int, perPage:Int): GamesResponse
+
 }
