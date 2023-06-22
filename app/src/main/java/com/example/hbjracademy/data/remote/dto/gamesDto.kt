@@ -62,8 +62,8 @@ fun gamesDto.toGame(): Games{
         stores=stores,
         suggestions_count=suggestions_count,
         tags=tags,
-        updated=updated,
         tba=tba,
+        updated=updated,
         user_game=user_game
     )
 }

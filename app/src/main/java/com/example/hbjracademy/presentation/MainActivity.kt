@@ -3,30 +3,47 @@ package com.example.hbjracademy.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.example.hbjracademy.ui.theme.HBJRAcademyTheme
+import androidx.navigation.compose.composable
+import com.example.hbjracademy.presentation.list.GamesListScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             HBJRAcademyTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(),
+                Surface(
                     color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.GamesListScreen.route
+                    ){
+
+                        composable(
+                            route = Screen.GamesListScreen.route
+                        ) {
+                            GamesListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.GamesDetailScreen.route + "/{gamesId}"
+                        ) {
+                            GamesListScreen(navController)
+
+                    }
+
                 }
             }
         }
     }
 }
-
+/*
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!")
@@ -37,5 +54,5 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     HBJRAcademyTheme {
         Greeting("Android")
-    }
+    }*/
 }
