@@ -11,7 +11,5 @@ class gamesRepositoryImpl @Inject constructor(
 ) : gamesRepository {
     override suspend fun getGames(): List<gamesDto> {
         return api.getGames(apiKey = Constants.API_KEY, ordering = "relevance", page = 1, perPage = 5)
-
-
     }
 }
