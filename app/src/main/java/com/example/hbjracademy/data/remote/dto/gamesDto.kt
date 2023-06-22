@@ -1,69 +1,111 @@
 package com.example.hbjracademy.data.remote.dto
 
 import com.example.hbjracademy.domain.model.Games
+import com.google.gson.annotations.SerializedName
 
 data class gamesDto(
-    val added: Int,
-    val added_by_status: AddedByStatus,
-    val background_image: String,
-    val clip: Any,
-    val dominant_color: String,
-    val esrb_rating: Any,
-    val genres: List<Genre>,
-    val id: Int,
-    val metacritic: Any,
-    val name: String,
-    val parent_platforms: List<ParentPlatform>,
-    val platforms: List<PlatformX>,
-    val playtime: Int,
-    val rating: Double,
-    val rating_top: Int,
-    val ratings: List<Rating>,
-    val ratings_count: Int,
-    val released: String,
-    val reviews_count: Int,
-    val reviews_text_count: Int,
-    val saturated_color: String,
-    val short_screenshots: List<ShortScreenshot>,
-    val slug: String,
-    val stores: List<Store>,
-    val suggestions_count: Int,
-    val tags: List<Tag>,
-    val tba: Boolean,
-    val updated: String,
-    val user_game: Any
+    @SerializedName("added")
+    val added: Int?,
+
+    @SerializedName("background_image")
+    val backgroundImage: String?,
+
+    @SerializedName("clip")
+    val clip: String?,
+
+    @SerializedName("community_rating")
+    val communityRating: Int?,
+
+    @SerializedName("dominant_color")
+    val dominantColor: String?,
+
+    @SerializedName("genres")
+    val genres: List<Genre>?,
+
+    @SerializedName("id")
+    val id: Int?,
+
+    @SerializedName("name")
+    val name: String?,
+
+    @SerializedName("platforms")
+    val platforms: List<Platform>?,
+
+    @SerializedName("metacritic")
+    val metacritic: Int?,
+
+    @SerializedName("playtime")
+    val playtime: Int?,
+
+    @SerializedName("rating")
+    val rating: Double?,
+
+    @SerializedName("rating_top")
+    val ratingTop: Int?,
+
+    @SerializedName("ratings")
+    val ratings: List<Rating>?,
+
+    @SerializedName("ratings_count")
+    val ratingsCount: Int?,
+
+    @SerializedName("released")
+    val released: String?,
+
+    @SerializedName("reviews_count")
+    val reviewsCount: Int?,
+
+    @SerializedName("reviews_text_count")
+    val reviewsTextCount: Int?,
+
+    @SerializedName("saturated_color")
+    val saturatedColor: String?,
+
+    @SerializedName("short_screenshots")
+    val shortScreenshots: List<ShortScreenshot>?,
+
+    @SerializedName("slug")
+    val slug: String?,
+
+    @SerializedName("suggestions_count")
+    val suggestionsCount: Int?,
+
+    @SerializedName("tags")
+    val tags: List<Tag>?,
+
+    @SerializedName("tba")
+    val tba: Boolean?,
+
+    @SerializedName("updated")
+    val updated: String?
 )
 
 fun gamesDto.toGame(): Games{
     return Games(
         added=added,
-        added_by_status=added_by_status,
-        background_image=background_image,
+        backgroundImage = backgroundImage,
         clip=clip,
-        dominant_color=dominant_color,
+        communityRating = communityRating,
+        dominantColor = dominantColor,
         genres=genres,
-        esrb_rating=esrb_rating,
         id=id,
         metacritic=metacritic,
         name=name,
-        parent_platforms=parent_platforms,
         platforms=platforms,
         playtime=playtime,
         rating=rating,
-        rating_top=rating_top,
+        ratingTop=ratingTop,
         ratings=ratings,
-        ratings_count=ratings_count,
+        ratingsCount=ratingsCount,
         released=released,
-        reviews_count=reviews_count,
-        reviews_text_count=reviews_text_count,
-        saturated_color=saturated_color,
-        short_screenshots=short_screenshots,
+        reviewsCount=reviewsCount,
+        reviewsTextCount=reviewsTextCount,
+        saturatedColor=saturatedColor,
+        shortScreenshots=shortScreenshots,
         slug=slug,
-        stores=stores,
-        suggestions_count=suggestions_count,
+        suggestionsCount=suggestionsCount,
         tags=tags,
-        updated=updated,
         tba=tba,
-        user_game=user_game
+        updated=updated
     )
 }
