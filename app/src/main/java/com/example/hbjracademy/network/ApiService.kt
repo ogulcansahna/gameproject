@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
     @GET("lists/main")
     suspend fun getGames(
         @Query("key") apiKey: String,
@@ -22,5 +21,4 @@ interface ApiService {
         @Path("id") gameId: Int,
         @Query("key") apiKey: String
     ): Response<GameDetailsResponseDto>
-
 }

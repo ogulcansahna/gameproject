@@ -11,17 +11,13 @@ class GameDetailsRepositoryImpl constructor(private val apiService: ApiService) 
     GameDetailsRepository, SafeApiRequest() {
 
     override suspend fun getGameDetails(gameId: Int): GameDetailsResponse {
-
         println("GameId in gameDetailsRepoImpl: $gameId")
-
-        val gameDetailsResponse = safeApiRequest {
+        val gameDetailsResponse = safeRequest {
             apiService.getGameDetails(
                 apiKey = Constants.API_KEY,
                 gameId = gameId
             )
         }
-
         return gameDetailsResponse.toDomain()
     }
-
 }

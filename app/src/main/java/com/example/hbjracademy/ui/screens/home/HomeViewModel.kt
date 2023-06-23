@@ -10,7 +10,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.example.hbjracademy.common.Resource
 import com.example.hbjracademy.domain.use_case.GetGamesUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel constructor(private val getGamesUseCase: GetGamesUseCase) : ViewModel() {
 
@@ -47,5 +48,4 @@ class HomeViewModel constructor(private val getGamesUseCase: GetGamesUseCase) : 
             }
         }
     }
-
 }

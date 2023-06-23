@@ -15,20 +15,16 @@ import timber.log.Timber
 class GamesApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
         initKoin()
-
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
     private fun initKoin() {
         val modules = listOf(domainModule, networkModule, repositoryModule, presentationModule)
-
         startKoin {
             androidLogger(level = Level.NONE)
             androidContext(this@GamesApplication)
             modules(modules)
         }
     }
-
 }

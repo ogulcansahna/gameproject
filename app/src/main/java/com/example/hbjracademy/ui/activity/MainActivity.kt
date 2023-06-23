@@ -1,11 +1,22 @@
 package com.example.hbjracademy.ui.activity
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,10 +33,10 @@ import com.example.hbjracademy.ui.theme.HBJRAcademyTheme
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val sp:SharedPreferences
+        sp=getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         setContent {
             HBJRAcademyTheme {
                 Surface(color = MaterialTheme.colors.background) {
@@ -61,7 +72,8 @@ fun MainScreen() {
 fun BottomNavigationBar(navController: NavController, items: List<NavigationItem>) {
     Card(
         modifier = Modifier
-            .height(74.dp).fillMaxWidth()
+            .height(74.dp)
+            .fillMaxWidth()
     ) {
         val backStackEntry = navController.currentBackStackEntryAsState()
 

@@ -22,7 +22,6 @@ fun Navigation(navController: NavHostController) {
             HomeScreen(navController = navController)
         }
 
-
         composable(NavigationItem.Favorite.route) {
             FavoritesScreen()
         }
@@ -32,10 +31,11 @@ fun Navigation(navController: NavHostController) {
             arguments = listOf(navArgument("gameId") { type = NavType.IntType })
         ) {
             val gameId = it.arguments?.getInt("gameId")
-            GameDetailsScreen(gameIdArg = gameId!!) {
-                navController.navigateUp()
+            if (gameId != null) {
+                GameDetailsScreen(gameIdArg = gameId) {
+                    navController.navigateUp()
+                }
             }
-
             }
         }
     }

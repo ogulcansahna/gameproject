@@ -12,8 +12,7 @@ class GamesRepositoryImpl constructor(private val apiService: ApiService) : Game
 
     override suspend fun getGames(ordering: String, page: Int, perPage: Int): GamesResponse {
         println("Game in gameRepoImpl")
-
-        val getGamesResponse = safeApiRequest {
+        val getGamesResponse = safeRequest {
             apiService.getGames(
                 apiKey = Constants.API_KEY,
                 ordering = ordering,

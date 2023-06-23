@@ -14,5 +14,4 @@ class GetGamesUseCase constructor(private val gameRepository: GamesRepository) {
             val gamesResponse = gameRepository.getGames(ordering, page, perPage)
             emit(Resource.Success(gamesResponse))
         }
-
 }

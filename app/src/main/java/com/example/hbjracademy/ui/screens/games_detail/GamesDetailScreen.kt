@@ -2,16 +2,23 @@ package com.example.hbjracademy.ui.screens.games_detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -22,21 +29,13 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import com.example.hbjracademy.R
-import com.example.hbjracademy.domain.models.Game
 import com.example.hbjracademy.domain.models.GameDetailsResponse
-import com.example.hbjracademy.ui.screens.home.GamesGrid
-import com.example.hbjracademy.ui.screens.home.components.GameItem
-import com.example.hbjracademy.ui.screens.home.components.HomeToolbar
-import com.example.hbjracademy.ui.theme.TextSecondary
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
@@ -47,12 +46,9 @@ fun GameDetailsScreen(
     viewModel: GameDetailsViewModel = getViewModel(),
     upPressed: () -> Unit
 ) {
-
-
     LaunchedEffect(key1 = gameIdArg) {
         viewModel.getGameDetails(gameId = gameIdArg)
     }
-
     val gameDetailsState = viewModel.state.value
     val gameDetails = gameDetailsState.gameDetails
 
@@ -60,7 +56,7 @@ fun GameDetailsScreen(
     }
     if (gameDetails != null) {
         BackgroundImage(viewModel = viewModel, gameDetails = gameDetails)
-        GameDetail(gameDetails = gameDetails)
+        GameDetail(gameDetails = gameDetails, viewModel)
         BackButton {
             upPressed()
         }
@@ -104,7 +100,7 @@ fun BackgroundImage(viewModel: GameDetailsViewModel, gameDetails: GameDetailsRes
 }
 
 @Composable
-fun GameDetail(gameDetails: GameDetailsResponse) {
+fun GameDetail(gameDetails: GameDetailsResponse, viewModel: GameDetailsViewModel) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -113,13 +109,14 @@ fun GameDetail(gameDetails: GameDetailsResponse) {
             .verticalScroll(state = scrollState)
     ) {
         Spacer(modifier = Modifier.height(360.dp))
-
         DetailsText(text = "Game Description")
         DetailsText(text = gameDetails.descriptionRaw.toString())
-        goReddit(text = "Visit Reddit",gameDetails.name.toString())
-        goWeb(text = "Visit Website",gameDetails.name.toString())
+        addFavorites(text = "Add Favorites", gameDetails, viewModel)
+        GoReddit(text = "Visit Reddit", gameDetails.name.toString())
+        GoWeb(text = "Visit Website", gameDetails.name.toString())
     }
 }
+
 
 @Composable
 fun BackButton(modifier: Modifier = Modifier, upPressed: () -> Unit) {
@@ -134,6 +131,7 @@ fun BackButton(modifier: Modifier = Modifier, upPressed: () -> Unit) {
         }
     }
 }
+
 @Composable
 fun DetailsText(text: String) {
     Text(
@@ -148,13 +146,15 @@ fun DetailsText(text: String) {
 }
 
 @Composable
-fun goReddit(text: String, name: String) {
+fun GoReddit(text: String, name: String) {
     val uriHandler = LocalUriHandler.current
     val uri = "https://www.reddit.com/search/?q=" + name
     Text(
-        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).clickable {
-            uriHandler.openUri(uri)
-        },
+        modifier = Modifier
+            .padding(horizontal = 10.dp, vertical = 8.dp)
+            .clickable {
+                uriHandler.openUri(uri)
+            },
         text = text,
         style = MaterialTheme.typography.h1,
         overflow = TextOverflow.Ellipsis,
@@ -164,13 +164,31 @@ fun goReddit(text: String, name: String) {
 }
 
 @Composable
-fun goWeb(text: String, name: String) {
+fun GoWeb(text: String, name: String) {
     val uriHandler = LocalUriHandler.current
     val uri = "https://www.google.com/search?q=" + name
     Text(
-        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp).clickable {
-            uriHandler.openUri(uri)
-        },
+        modifier = Modifier
+            .padding(horizontal = 10.dp, vertical = 8.dp)
+            .clickable {
+                uriHandler.openUri(uri)
+            },
+        text = text,
+        style = MaterialTheme.typography.h1,
+        overflow = TextOverflow.Ellipsis,
+        textAlign = TextAlign.Start,
+        color = Color(0xFF313131)
+    )
+}
+
+@Composable
+fun addFavorites(text: String, detailInfo: GameDetailsResponse, viewModel: GameDetailsViewModel) {
+    Text(
+        modifier = Modifier
+            .padding(horizontal = 10.dp, vertical = 8.dp)
+            .clickable {
+                viewModel.setFavorites(detailInfo)
+            },
         text = text,
         style = MaterialTheme.typography.h1,
         overflow = TextOverflow.Ellipsis,

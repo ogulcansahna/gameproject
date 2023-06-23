@@ -7,9 +7,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.hbjracademy.ui.screens.games_detail.GameDetailsState
 
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = "There is no favorites found.",
             modifier = Modifier.align(Alignment.CenterHorizontally),

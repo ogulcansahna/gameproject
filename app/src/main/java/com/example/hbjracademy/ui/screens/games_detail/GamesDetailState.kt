@@ -5,5 +5,6 @@ import com.example.hbjracademy.domain.models.GameDetailsResponse
 data class GameDetailsState(
     val isLoading: Boolean = false,
     val gameDetails: GameDetailsResponse? = null,
-    val error: String = ""
+    val error: String = "",
+    val favList: MutableList<GameDetailsResponse>? = mutableListOf()
 )

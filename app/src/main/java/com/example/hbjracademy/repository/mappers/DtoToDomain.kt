@@ -1,7 +1,27 @@
 package com.example.hbjracademy.repository.mappers
 
-import com.example.hbjracademy.domain.models.*
-import com.example.hbjracademy.network.models.*
+import com.example.hbjracademy.domain.models.GamesResponse
+import com.example.hbjracademy.domain.models.Genre
+import com.example.hbjracademy.domain.models.PlatformDetail
+import com.example.hbjracademy.domain.models.Platforms
+import com.example.hbjracademy.domain.models.GameDetailsResponse
+import com.example.hbjracademy.domain.models.Rating
+import com.example.hbjracademy.domain.models.Game
+import com.example.hbjracademy.domain.models.ShortScreenshot
+import com.example.hbjracademy.domain.models.Tag
+import com.example.hbjracademy.domain.models.Developer
+import com.example.hbjracademy.domain.models.Publisher
+import com.example.hbjracademy.network.models.GamesResponseDto
+import com.example.hbjracademy.network.models.GenreDto
+import com.example.hbjracademy.network.models.PlatformDetailDto
+import com.example.hbjracademy.network.models.PlatformsDto
+import com.example.hbjracademy.network.models.RatingDto
+import com.example.hbjracademy.network.models.GameDto
+import com.example.hbjracademy.network.models.GameDetailsResponseDto
+import com.example.hbjracademy.network.models.ShortScreenshotDto
+import com.example.hbjracademy.network.models.TagDto
+import com.example.hbjracademy.network.models.DeveloperDto
+import com.example.hbjracademy.network.models.PublisherDto
 
 internal fun GamesResponseDto.toDomain(): GamesResponse {
     return GamesResponse(

@@ -12,7 +12,6 @@ import com.example.hbjracademy.domain.models.Game
 import com.example.hbjracademy.ui.screens.home.components.GameItem
 import com.example.hbjracademy.ui.screens.home.components.HomeToolbar
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @ExperimentalMaterialApi
 @Composable
@@ -23,8 +22,6 @@ fun HomeScreen(viewModel: HomeViewModel = getViewModel(), navController: NavHost
     Scaffold(topBar = { HomeToolbar() }) {
         if (gameList != null) GamesGrid(gamesList = gameList, navController = navController)
     }
-
-
 }
 
 @ExperimentalMaterialApi
